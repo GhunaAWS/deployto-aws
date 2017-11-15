@@ -50,15 +50,14 @@
     connection_draining_timeout: 60
     security_group_ids: "{{ app_security_group.group_id }}"
     listeners:
-      - protocol: http
+      - protocol: http # options are http, https, ssl, tcp
         load_balancer_port: 80
         instance_port: 80
-    health_check:
-        ping_protocol: http 
-        ping_port: 80
-        ping_path: "/"
-        response_timeout: 5 
-        interval: 30
-        unhealthy_threshold: 3
-        healthy_threshold: 3
+        proxy_protocol: True
+      - protocol: https
+        load_balancer_port: 443
+        instance_protocol: http # optional, defaults to value of protocol setting
+        instance_port: 80
+        # ssl certificate required for https or ssl
+        ssl_certificate_id: "arn:aws:iam::123456789012:server-certificate/company/servercerts/ProdServerCert"
   register: load_balancer
