@@ -57,7 +57,7 @@
       - protocol: https
         load_balancer_port: 443
         instance_protocol: http # optional, defaults to value of protocol setting
-        instance_port: 80
+        instance_port: 443
         # ssl certificate required for https or ssl
         ssl_certificate_id: "arn:aws:iam::123456789012:server-certificate/company/servercerts/ProdServerCert"
   register: load_balancer
